@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="UTF-8">
+<title>Java3 Spring - Assignment3 YueZhang</title>
+</head>
+<body>
+	<h1>Assignment3 YueZhang</h1>
+	<h4>Secure Delete - Admin Only</h4>
+	<div sec:authorize="isAuthenticated()">
+	    UserName: <span sec:authentication="name"></span><br>
+	    Role: <span sec:authentication="principal.authorities"></span><br><br>
+	</div>
+	<hr>
+	
+	<form method="get" th:action="@{/deleteCourse}">
+		Course Id: <select name="id">
+				        <option th:each="course : ${courseList}"
+				                th:value="${course.courseId}"
+				                th:text="${course.courseId}">
+				        </option>
+				   </select><br> 
+		<input type="submit" value="Delete" /> 
+	</form>
+	<hr>
+	<table th:if="${courseList != null AND !courseList.empty}">
+		<tr>
+			<th>ID</th>
+			<th>Title</th>
+			<th>Category</th>
+			<th>Instructor</th>
+			<th>Price</th>
+			<th>Duration</th>
+			<th>Platform</th>
+			<th>Description</th>
+		</tr>
+		<tr th:each="c : ${courseList}">
+			<td th:text="${c.courseId}">ID</td>
+			<td th:text="${c.courseTitle}">Title</td>
+			<td th:text="${c.category}">Category</td>
+			<td th:text="${c.instructor}">Instructor</td>
+			<td th:text="${c.price}">Price</td>
+			<td th:text="${c.duration}">Duration</td>
+			<td th:text="${c.platform}">Platform</td>
+			<td th:text="${c.description}">Description</td>
+		</tr>
+	</table>
+	
+	
+	<p>
+		<a th:href="@{/}">Back to home page</a>
+	</p>
+	<form method="post" th:action="@{/logout}">
+		<input type="submit" value="Logout" />
+	</form>
+
+
+
+</body>
+</html>

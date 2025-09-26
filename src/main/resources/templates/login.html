@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+		xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" media="all"
+		href="../static/css/mycss.css" th:href="@{/css/mycss.css}" />
+<title>Java3 Spring - Assignment3 YueZhang</title>
+</head>
+<body>
+	<img src="../static/images/spring-boot-logo.png" 
+		th:src="@{/images/spring-boot-logo.png}" width="100px" height="100px"/>
+
+	<h1>Assignment3 YueZhang</h1>
+	<h4>Public - Login</h4>
+	ADMIN: Jack - 1234<br>
+	USER: Rose - 1111
+	<hr>
+	<form method="post" th:action="@{/login}">
+
+		<div th:if="${param.error}">
+			<div class="error">Invalid Credentials</div>
+		</div>
+	
+		<div th:if="${param.logout}">
+			<div class="success">You have been logged out</div>
+		</div>
+
+		UserName: <input type="text" name="username" /> <br> 
+		Password: <input type="password" name="password" /> <br>
+		<input type="submit" value="Log In" name="login-submit" />
+	</form>
+		
+
+</body>
+</html>
